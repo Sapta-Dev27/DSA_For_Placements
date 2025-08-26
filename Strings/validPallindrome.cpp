@@ -15,6 +15,18 @@ char toLowerCase(char ch)
   return ch;
 }
 
+string alphanumericString(string str)
+{
+  int n = str.length();
+  string temp = "";
+  for(int i = 0 ; i < n ; i++) {
+    if((str[i] >= 'A' && str[i] <='Z') || (str[i] >='a' && str[i] <='z') || (str[i] >='0' && str[i] <='9')){
+      temp.push_back(str[i]);
+    }
+  }
+  return temp;
+}
+
 bool checkValidPallindrome(string str, int n)
 {
   int start = 0;
@@ -39,8 +51,9 @@ int main()
   string str;
   cout << "Enter a string:";
   cin >> str;
-  int n = str.length();
-  bool isValidPallindrome = checkValidPallindrome(str, n);
+  string temp = alphanumericString(str);
+  int m = temp.length();
+  bool isValidPallindrome = checkValidPallindrome(temp, m);
   if (isValidPallindrome)
   {
     cout << "The string is a valid pallindrome" << endl;
