@@ -30,6 +30,5 @@ int main()
 }
 
 /*
-TIME COMPLEXITY : O(N2)
-SPACE COMPLEXITY : O(1)
+
 */
