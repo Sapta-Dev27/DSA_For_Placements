@@ -1,95 +1,94 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 
 struct Node
 {
   int data;
   Node *next;
-  Node(int data1)
-  {
-    data = data1;
-    next = nullptr;
-  }
   Node(int data1, Node *next1)
   {
     data = data1;
     next = next1;
   }
+  Node(int data1)
+  {
+    data = data1;
+    next = nullptr;
+  }
 };
 
-Node *convertArr2LL(vector<int> arr)
-{
+
+Node *convertArrayToLinkedList(vector<int>&arr){
   Node *head = new Node(arr[0]);
-  Node *mover = head;
-  for (int i = 1; i < arr.size(); i++)
-  {
+  Node *mover = head ;
+  for(int i = 1 ; i < arr.size(); i++){
     Node *temp = new Node(arr[i]);
-    mover->next = temp;
-    mover = mover->next;
+    mover -> next = temp;
+    mover = temp;
   }
   return head;
 }
 
-int search(Node *head, int value)
-{
+
+void LinkedListTraversal(Node *head){
   Node *temp = head;
-  while (temp != nullptr)
-  {
-    if (temp->data == value)
-    {
-      return 1;
-    }
-    temp = temp->next;
+  while(temp != nullptr){
+    cout <<temp->data<< " ";
+    temp=temp->next;
   }
-  return 0;
 }
 
-int countNodes(Node *head)
-{
-  int count = 0;
+int countNodes(Node *head){
   Node *temp = head;
-  while (temp != nullptr)
-  {
+  int count = 0;
+  while(temp!=nullptr){
     count++;
-    temp = temp->next;
+    temp=temp->next;
   }
   return count;
 }
 
+
+bool searchElement(Node *head , int value){
+  Node *temp = head;
+  while(temp != nullptr){
+    if(temp->data == value){
+      return true;
+    }
+    else {
+      temp=temp->next;
+    }
+  }
+  return false;
+}
+
+
+
+
 int main()
 {
   int n;
-  cout << "Enter the number of elements  in the array: ";
+  cout << "Enter number of elements in the array : ";
   cin >> n;
   vector<int> arr(n);
   for (int i = 0; i < n; i++)
   {
     cin >> arr[i];
   }
-  /*converting array to linked list*/
-  Node* head = convertArr2LL(arr);
-  /*printing the linked list*/
-  Node* temp = head;
-  while (temp != nullptr)
-  {
-    cout << temp->data << endl;
-    temp = temp->next;
-  }
-  /*counting the number of nodes in the linked list*/
-  int count = countNodes(head);
-  cout << "The number of nodes in the linked list are: " << count << endl;
+  Node *head = convertArrayToLinkedList(arr);
+  cout << "Linked List elements are : ";
+  LinkedListTraversal(head);
+  cout << endl;
+  cout << "Number of nodes in the linked list are : " << countNodes(head) << endl;
   int value;
-  cout << "Enter the value to be searched: " << endl;
+  cout << "Enter the element to be searched : ";
   cin >> value;
-  int checkIfPresent = search(head, value);
-  if (checkIfPresent == 1)
-  {
-    cout << "The value is present in the linked list" << endl;
+  if(searchElement(head , value)){
+    cout << "Element found in the linked list" << endl;
   }
-  else
-  {
-    cout << "The value is not present in the linked list" << endl;
+  else {
+    cout << "Element not found in the linked list" << endl;
   }
   return 0;
+
 }
