@@ -31,26 +31,37 @@ Node *convertArrayToLinkedList(vector<int> &arr)
   return head;
 }
 
-Node *reverseLinkedList(Node *head){
-  if(head == nullptr){
+Node *reverseLinkedList(Node *head , int left , int right){
+    if(head == nullptr){
     return nullptr;
-  }
-  if(head->next == nullptr){
+    }
+    if(head -> next == nullptr){
     return head;
-  }
-  stack<int>st;
-  Node *temp = head;
-  while(temp != nullptr){
-     st.push(temp->data);
-     temp = temp->next; 
-  }
-  temp = head;
-  while(temp != nullptr){
-    temp->data = st.top();
-    st.pop();
-    temp = temp->next;
-  }
-  return head;
+    }
+    if(left == right){
+        return head;
+    }
+    stack<int> st;
+    Node *temp = head;
+    int count =0;
+    while(temp != nullptr){
+        count++;
+        if(count >= left && count <= right){
+            st.push(temp->data);
+        }
+        temp = temp->next;
+    }
+    temp = head;
+    count =0;
+    while(temp != nullptr){
+        count++;
+        if(count >= left && count <= right){
+            temp->data = st.top();
+            st.pop();
+        }
+        temp = temp->next;
+    }
+    return head;
 }
 
 
@@ -74,7 +85,10 @@ int main()
     temp = temp->next;
   }
   cout << endl;
-  head = reverseLinkedList(head);
+  int left , right;
+  cout << "Enter left and right positions: ";
+  cin >> left >> right;
+  head = reverseLinkedList(head, left , right);
   cout << "Linked List after reversing is: ";
   temp = head;
   while (temp != nullptr)
