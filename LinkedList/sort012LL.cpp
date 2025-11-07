@@ -31,44 +31,43 @@ Node *convertArrayToLinkedList(vector<int> &arr)
   return head;
 }
 
-Node *oddEvenLL(Node *head)
-{
-  if (head == nullptr)
-  {
+Node *sort012LL(Node *head){
+  if(head==nullptr){
     return head;
   }
-  if (head->next == nullptr)
-  {
+  if(head -> next == nullptr){
     return head;
   }
+  Node *zeroHead = new Node(-1);
+  Node *oneHead = new Node(-1);
+  Node *twoHead = new Node(-1);
+  Node *zero = zeroHead;
+  Node *one = oneHead;
+  Node *two = twoHead;
   Node *temp = head;
-  vector<int> arr;
-  while (temp != nullptr)
-  {
-    if (temp->data % 2 == 0)
-    {
-      arr.push_back(temp->data);
-    }
-    temp = temp->next;
+  while(temp != nullptr){
+     if(temp -> data == 0){
+      zero -> next = temp;
+      zero = zero -> next;
+     }
+     else if(temp -> data == 1){
+      one -> next = temp;
+      one = one -> next;
+     }
+     else {
+      two -> next = temp;
+      two= two-> next;
+     }
+      temp = temp -> next;
   }
-  temp = head;
-  while (temp != nullptr)
-  {
-    if (temp->data % 2 != 0)
-    {
-      arr.push_back(temp->data);
-    }
-    temp = temp->next;
-  }
-  temp = head;
-  int i = 0;
-  while (temp != nullptr)
-  {
-    temp->data = arr[i];
-    i++;
-    temp = temp->next;
-  }
-  return head;
+  zero -> next = ( oneHead -> next) ? (oneHead->next) : (twoHead -> next);
+  one -> next = twoHead -> next;
+  two -> next = nullptr;
+  Node * newNode = zeroHead -> next;
+  delete oneHead;
+  delete twoHead;
+  delete zeroHead;
+  return newNode;
 }
 
 int main()
@@ -91,8 +90,8 @@ int main()
     temp = temp->next;
   }
   cout << endl;
-  head = oddEvenLL(head);
-  cout << "Linked List after odd-even arrangement is: ";
+  head = sort012LL(head);
+  cout << "Linked List after sorting is: ";
   temp = head;
   while (temp != nullptr)
   {
