@@ -28,7 +28,7 @@ string reverseVowels(string s)
 int main() {
   string s;
   cout << "Enter a string: ";
-  cin >> s;
+  getline(cin, s);
   string result = reverseVowels(s);
   cout << "String after reversing vowels: " << result << endl;
 }
