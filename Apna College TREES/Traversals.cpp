@@ -119,6 +119,33 @@ void levelOrder2(Node *root)
   }
 }
 
+int height(Node * root){
+  if(root == NULL){
+    return 0;
+  }
+  int left = height(root -> left);
+  int right = height(root -> right);
+  return max(left , right) + 1;
+}
+
+int countNodes(Node *root){
+  if(root == NULL){
+    return  0;
+  }
+  int left = countNodes(root -> left);
+  int right = countNodes(root -> right);
+  return left + right + 1;
+}
+
+int sumNodes(Node *root){
+  if(root == NULL){
+    return 0;
+  }
+  int left = sumNodes(root -> left);
+  int right = sumNodes(root -> right);
+  return left + right + root -> data;
+}
+
 int main()
 {
   vector<int> arr = {1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1};
@@ -133,5 +160,9 @@ int main()
   levelOrder1(root);
   cout << endl ;
   levelOrder2(root);
+  cout << endl ;
+  cout << "Height of the tree: " << height(root) << endl;
+  cout << "Number of nodes in the tree: " << countNodes(root) << endl;
+  cout << "Sum of all nodes in the tree: " << sumNodes(root) << endl;
   return 0;
 }
